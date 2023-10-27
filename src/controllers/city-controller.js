@@ -81,10 +81,29 @@ const update = async (req, res) => {
     });
   }
 };
-
+const getAllCity = async (req, res) => {
+  try {
+    const cities = await cityService.getAllCity();
+    return res.status(200).json({
+      data: cities,
+      success: true,
+      message: "city updated successfully",
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      data: {},
+      success: false,
+      message: "sometings went wrong",
+      err: error,
+    });
+  }
+};
 module.exports = {
   create,
   destory,
   get,
   update,
+  getAllCity,
 };
