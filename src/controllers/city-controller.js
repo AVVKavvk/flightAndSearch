@@ -83,11 +83,11 @@ const update = async (req, res) => {
 };
 const getAllCity = async (req, res) => {
   try {
-    const cities = await cityService.getAllCity();
+    const cities = await cityService.getAllCity(req.query);
     return res.status(200).json({
       data: cities,
       success: true,
-      message: "city updated successfully",
+      message: "All cities are fetched",
       err: {},
     });
   } catch (error) {
