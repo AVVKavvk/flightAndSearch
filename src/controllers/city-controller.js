@@ -2,8 +2,9 @@ const { CityService } = require("../services/index");
 const cityService = new CityService();
 
 const create = async (req, res) => {
+  // PSOT -> req.body
   try {
-    const city = await cityService.createCity(req, body);
+    const city = await cityService.createCity(req.body);
     return res.status(201).json({
       data: city,
       success: true,
@@ -21,10 +22,11 @@ const create = async (req, res) => {
   }
 };
 const destory = async (req, res) => {
+  // DELETE -> city/:id
   try {
-    await cityService.deleteCity(req.body);
-    return res.status(203).json({
-      data: {},
+    const respone = await cityService.deleteCity(req.params.id);
+    return res.status(200).json({
+      data: respone,
       success: true,
       message: "city deleted successfully",
       err: {},
@@ -40,9 +42,10 @@ const destory = async (req, res) => {
   }
 };
 const get = async (req, res) => {
+  // GET -> city/:id
   try {
-    const city = await cityService.getCity(req.body);
-    return res.status(204).json({
+    const city = await cityService.getCity(req.params.id);
+    return res.status(200).json({
       data: city,
       success: true,
       message: "city fetched successfully",
@@ -59,9 +62,10 @@ const get = async (req, res) => {
   }
 };
 const update = async (req, res) => {
+  // PUT -> city/:id -> req.body
   try {
-    const city = await cityService.updateCity(req.body);
-    return res.status(205).json({
+    const city = await cityService.updateCity(req.params.id, req.body);
+    return res.status(200).json({
       data: city,
       success: true,
       message: "city updated successfully",
