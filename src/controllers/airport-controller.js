@@ -3,7 +3,7 @@ const airportService = new AirportService();
 const create = async (req, res) => {
   try {
     const airport = await airportService.createAirport(req.body);
-    return res.status(200).json({
+    return res.status(201).json({
       data: airport,
       success: true,
       message: "Airport Created Successfully",
@@ -19,7 +19,7 @@ const create = async (req, res) => {
     });
   }
 };
-const destory = async (req, res) => {
+const destroy = async (req, res) => {
   try {
     const airport = await airportService.deleteAirport(req.params.id);
     return res.status(200).json({
@@ -98,7 +98,7 @@ const getAll = async (req, res) => {
 
 module.exports = {
   create,
-  destory,
+  destroy,
   update,
   get,
   getAll,

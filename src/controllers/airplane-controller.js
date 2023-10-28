@@ -1,14 +1,13 @@
-const { CityService } = require("../services/index");
-const cityService = new CityService();
+const { AirplaneService } = require("../services/index");
+const airplaneService = new AirplaneService();
 
 const create = async (req, res) => {
-  // PSOT -> req.body
   try {
-    const city = await cityService.createCity(req.body);
-    return res.status(201).json({
-      data: city,
+    const airplane = await airplaneService.createAirplane(req.body);
+    return res.status(200).json({
+      data: airplane,
       success: true,
-      message: "City created successfully",
+      message: "Airplane Created Successfully",
       err: {},
     });
   } catch (error) {
@@ -22,13 +21,12 @@ const create = async (req, res) => {
   }
 };
 const destroy = async (req, res) => {
-  // DELETE -> city/:id
   try {
-    const respone = await cityService.deleteCity(req.params.id);
+    const airplane = await airplaneService.deleteAirplane(req.params.id);
     return res.status(200).json({
-      data: respone,
+      data: airplane,
       success: true,
-      message: "city deleted successfully",
+      message: "Airplane Deleted Successfully",
       err: {},
     });
   } catch (error) {
@@ -42,13 +40,12 @@ const destroy = async (req, res) => {
   }
 };
 const get = async (req, res) => {
-  // GET -> city/:id
   try {
-    const city = await cityService.getCity(req.params.id);
+    const airplane = await airplaneService.getAirplane(req.params.id);
     return res.status(200).json({
-      data: city,
+      data: airplane,
       success: true,
-      message: "city fetched successfully",
+      message: "Airplane Fetched Successfully",
       err: {},
     });
   } catch (error) {
@@ -62,13 +59,15 @@ const get = async (req, res) => {
   }
 };
 const update = async (req, res) => {
-  // PUT -> city/:id -> req.body
   try {
-    const city = await cityService.updateCity(req.params.id, req.body);
+    const airplane = await airplaneService.updateAirplane(
+      req.params.id,
+      req.body
+    );
     return res.status(200).json({
-      data: city,
+      data: airplane,
       success: true,
-      message: "city updated successfully",
+      message: "Airplane Updated Successfully",
       err: {},
     });
   } catch (error) {
@@ -81,13 +80,13 @@ const update = async (req, res) => {
     });
   }
 };
-const getAllCity = async (req, res) => {
+const getAll = async (req, res) => {
   try {
-    const cities = await cityService.getAllCity(req.query);
+    const airplanes = await airplaneService.getAllAirplane(req.query);
     return res.status(200).json({
-      data: cities,
+      data: airplanes,
       success: true,
-      message: "All cities are fetched",
+      message: "Airplanes Fetched Successfully",
       err: {},
     });
   } catch (error) {
@@ -100,10 +99,11 @@ const getAllCity = async (req, res) => {
     });
   }
 };
+
 module.exports = {
   create,
   destroy,
   get,
+  getAll,
   update,
-  getAllCity,
 };

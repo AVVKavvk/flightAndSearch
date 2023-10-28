@@ -40,7 +40,7 @@ class AirplaneService {
   async getAllAirplane(data) {
     try {
       const respone = await airplaneRepository.getAllAirplane({
-        name: data.name,
+        modelNumber: data.modelNumber,
       });
       return respone;
     } catch (error) {
