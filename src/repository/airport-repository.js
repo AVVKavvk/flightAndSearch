@@ -46,15 +46,18 @@ class AirportRepository {
   }
   async getAllAirport(filter) {
     try {
-      const airport = await Airport.findAll({
-        where: {
-          name: {
-            [Op.startsWith]: filter.name,
+      if (filter.name) {
+        const airport = await Airport.findAll({
+          where: {
+            name: {
+              [Op.startsWith]: filter.name,
+            },
           },
-        },
-      });
-
-      return airport;
+        });
+        return airport;
+      }
+      const airports = await Airport.findAll();
+      return airports;
     } catch (error) {
       console.log("somethings went wrong in Repository Layer");
       throw error;
