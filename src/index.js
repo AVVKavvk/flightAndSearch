@@ -3,6 +3,8 @@ const sequelize = require("sequelize");
 const { PORT } = require("./config/serverConfig");
 const apiRoute = require("./routes/index");
 const db = require("./models");
+// const { AirportRepository } = require("./repository/index");
+const { AirportService } = require("./services/index");
 function startServer() {
   const app = express();
   app.listen(PORT, async () => {
@@ -13,29 +15,15 @@ function startServer() {
     if (process.env.SYNC_DB) {
       db.sequelize.sync({ alter: true });
     }
-    // const airports = await Airport.findAll({
-    // include: City,
-    //   include: [{ model: City }],
+    const airport = new AirportService();
+    // airport.createAirport({
+    //   name: "KKR International Airport",
+    //   cityId: 8,
     // });
-    // console.log(airports);
-    // const newAirport = await Airport.create({
-    //   name: "Mumbai Airport",
-    //   cityId: 6,
-    // });
-    // console.log(newAirport);
-    // const city = await City.findOne({
-    //   where: {
-    //     id: 7,
-    //   },
-    // });
-    //   const newAirport = await Airport.findOne({
-    //     where: {
-    //       name: "Mumbai Airport",
-    //     },
-    //   });
-    //   await city.addAirports(newAirport);
-    // const airports = await city.getAirports();
-    // console.log(airports);
+    // airport.deleteAirport(20);
+    // airport.updateAirport(3, { name: "Saganer International Airport" });
+    // airport.getAirport(18);
+    // airport.getAllAirport({ name: "s" });
   });
 }
 startServer();
